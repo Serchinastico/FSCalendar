@@ -4,7 +4,7 @@
 //
 //  Created by Wenchao Ding on 29/1/15.
 //  Copyright © 2016 Wenchao Ding. All rights reserved.
-// 
+//
 //  https://github.com/WenchaoD
 //
 //  FSCalendar is a superior awesome calendar control with high performance, high customizablility and very simple usage.
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarMonthPosition) {
     FSCalendarMonthPositionPrevious,
     FSCalendarMonthPositionCurrent,
     FSCalendarMonthPositionNext,
-    
+
     FSCalendarMonthPositionNotFound = NSNotFound
 };
 
@@ -290,13 +290,13 @@ IB_DESIGNABLE
  * The locale of month and weekday symbols. Change it to display them in your own language.
  *
  * e.g. To display them in Chinese:
- * 
+ *
  *    calendar.locale = [NSLocale localeWithLocaleIdentifier:@"zh-CN"];
  */
 @property (copy, nonatomic) NSLocale *locale;
 
 /**
- * The scroll direction of FSCalendar. 
+ * The scroll direction of FSCalendar.
  *
  * e.g. To make the calendar scroll vertically
  *
@@ -304,8 +304,10 @@ IB_DESIGNABLE
  */
 @property (assign, nonatomic) FSCalendarScrollDirection scrollDirection;
 
+@property (strong, nonatomic) NSTimeZone *timeZone;
+
 /**
- * The scope of calendar, change scope will trigger an inner frame change, make sure the frame has been correctly adjusted in 
+ * The scope of calendar, change scope will trigger an inner frame change, make sure the frame has been correctly adjusted in
  *
  *    - (void)calendar:(FSCalendar *)calendar boundingRectWillChange:(CGRect)bounds animated:(BOOL)animated;
  */
@@ -313,14 +315,14 @@ IB_DESIGNABLE
 
 /**
  A UIPanGestureRecognizer instance which enables the control of scope on the whole day-area. Not available if the scrollDirection is vertical.
- 
+
  @deprecated Use -handleScopeGesture: instead
- 
+
  e.g.
- 
+
     UIPanGestureRecognizer *scopeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:calendar action:@selector(handleScopeGesture:)];
     [calendar addGestureRecognizer:scopeGesture];
- 
+
  @see DIYExample
  @see FSCalendarScopeExample
  */
@@ -395,17 +397,17 @@ IB_DESIGNABLE
 
 /**
  A Boolean value that determines whether the calendar should show a handle for control the scope. Default is NO;
- 
+
  @deprecated Use -handleScopeGesture: instead
- 
+
  e.g.
- 
+
     UIPanGestureRecognizer *scopeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self.calendar action:@selector(handleScopeGesture:)];
     scopeGesture.delegate = ...
     [anyOtherView addGestureRecognizer:scopeGesture];
- 
+
  @see FSCalendarScopeExample
- 
+
  */
 @property (assign, nonatomic) IBInspectable BOOL showsScopeHandle FSCalendarDeprecated(handleScopeGesture:);
 
@@ -446,7 +448,7 @@ IB_DESIGNABLE
 
 /**
  Change the scope of the calendar. Make sure `-calendar:boundingRectWillChange:animated` is correctly adopted.
- 
+
  @param scope The target scope to change.
  @param animated YES if you want to animate the scoping; NO if the change should be immediate.
  */
@@ -454,14 +456,14 @@ IB_DESIGNABLE
 
 /**
  Selects a given date in the calendar.
- 
+
  @param date A date in the calendar.
  */
 - (void)selectDate:(nullable NSDate *)date;
 
 /**
  Selects a given date in the calendar, optionally scrolling the date to visible area.
- 
+
  @param date A date in the calendar.
  @param scrollToDate A Boolean value that determines whether the calendar should scroll to the selected date to visible area.
  */
@@ -469,14 +471,14 @@ IB_DESIGNABLE
 
 /**
  Deselects a given date of the calendar.
- 
+
  @param date A date in the calendar.
  */
 - (void)deselectDate:(NSDate *)date;
 
 /**
  Changes the current page of the calendar.
- 
+
  @param currentPage Representing weekOfYear in week mode, or month in month mode.
  @param animated YES if you want to animate the change in position; NO if it should be immediate.
  */
@@ -511,7 +513,7 @@ IB_DESIGNABLE
 
 /**
  Returns the date of the specified cell.
- 
+
  @param cell The cell object whose date you want.
  @return The date of the cell or nil if the specified cell is not in the calendar.
  */
@@ -519,7 +521,7 @@ IB_DESIGNABLE
 
 /**
  Returns the month position of the specified cell.
- 
+
  @param cell The cell object whose month position you want.
  @return The month position of the cell or FSCalendarMonthPositionNotFound if the specified cell is not in the calendar.
  */
@@ -528,14 +530,14 @@ IB_DESIGNABLE
 
 /**
  Returns an array of visible cells currently displayed by the calendar.
- 
+
  @return An array of FSCalendarCell objects. If no cells are visible, this method returns an empty array.
  */
 - (NSArray<__kindof FSCalendarCell *> *)visibleCells;
 
 /**
  Returns the frame for a non-placeholder cell relative to the super view of the calendar.
- 
+
  @param date A date is the calendar.
  */
 - (CGRect)frameForDate:(NSDate *)date;
@@ -547,7 +549,7 @@ IB_DESIGNABLE
 
 /**
  An action selector for UIPanGestureRecognizer instance to control the scope transition
- 
+
  @param sender A UIPanGestureRecognizer instance which controls the scope of the calendar
  */
 - (void)handleScopeGesture:(UIPanGestureRecognizer *)sender;
@@ -633,4 +635,3 @@ IB_DESIGNABLE
 @end
 
 NS_ASSUME_NONNULL_END
-
